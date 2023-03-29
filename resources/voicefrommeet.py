@@ -58,4 +58,3 @@ with sc.get_microphone(id=str(sc.default_speaker().name), include_loopback=True)
 # convert the wav file to mp3
 AudioSegment.from_wav(OUTPUT_FILE_NAME).export(OUTPUT_FILE_NAME_MP3, format="mp3")
 os.remove("out.wav")
-# test
