@@ -1,10 +1,10 @@
 import re
 import torch
 import whisper
+from timeit import timeit
 
 
-
-AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
+# AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
 
 
 def banner(text):
@@ -21,13 +21,17 @@ def check_device():
     return device
 
 
-def get_result():
+def get_result(AUDIOFILE):
     # """Get speech recognition model."""
     # model_name = input("Select speech recognition model name (tiny, base, small, medium, large): ")
     model_name = "tiny"
     banner("Transcribing text")
     model = whisper.load_model(model_name, device=check_device())
     result = model.transcribe(AUDIOFILE)
+    # print("Result: ",result["text"])
+    
+    return result["text"]
+    
 #     format_result('transcription.txt', result["text"])
 
 
@@ -38,4 +42,5 @@ def get_result():
 #         banner("Writing transcription to text file")
 #         file.write(format_text)
 
-get_result()  # Get audio transcription and translation if needed
+# print(type(get_result()))  # Get audio transcription and translation if needed
+# get_result(r"D:\Projects and codes\Audio-transcriber-main\audio.mp3")
