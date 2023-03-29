@@ -4,7 +4,7 @@ import whisper
 
 
 
-AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
+AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio.mp3"  # Save audio file as audio.mp3
 
 
 def banner(text):

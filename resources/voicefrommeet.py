@@ -8,6 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import soundcard as sc
 import soundfile as sf
 import numpy as np
+from pydub import AudioSegment
+import time
+import os
 
 options = Options()
 #<---------Directing to default chrome proafile---------->
@@ -25,6 +28,7 @@ join_button = WebDriverWait(driver, 10).until(
 join_button.click()
 
 OUTPUT_FILE_NAME = "out.wav"    # file name.
+OUTPUT_FILE_NAME_MP3 = "./Interview/resources/out.mp3"    # mp3 file name.
 SAMPLE_RATE = 48000              # [Hz]. sampling rate.
 DURATION = None                  # [sec]. duration recording audio.
 
@@ -51,3 +55,6 @@ with sc.get_microphone(id=str(sc.default_speaker().name), include_loopback=True)
     data = np.concatenate(frames, axis=0)
     # change "data=data[:, 0]" to "data=data", if you would like to write audio as multiple-channels.
     sf.write(file=OUTPUT_FILE_NAME, data=data[:, 0], samplerate=SAMPLE_RATE)
+# convert the wav file to mp3
+AudioSegment.from_wav(OUTPUT_FILE_NAME).export(OUTPUT_FILE_NAME_MP3, format="mp3")
+os.remove("out.wav")
