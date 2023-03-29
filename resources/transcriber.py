@@ -1,7 +1,7 @@
-import re
+# import re
 import torch
 import whisper
-from timeit import timeit
+# from timeit import timeit
 
 
 # AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
@@ -21,10 +21,17 @@ def check_device():
     return device
 
 
-def get_result(AUDIOFILE):
+def getResult(AUDIOFILE):
+    
+    
     # """Get speech recognition model."""
     # model_name = input("Select speech recognition model name (tiny, base, small, medium, large): ")
+    
+    #choose a mode defaulted
+    """tiny"""
+    
     model_name = "tiny"
+    
     banner("Transcribing text")
     model = whisper.load_model(model_name, device=check_device())
     result = model.transcribe(AUDIOFILE)
