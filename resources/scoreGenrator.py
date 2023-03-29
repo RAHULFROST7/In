@@ -8,10 +8,13 @@ from nltk.corpus import stopwords
 import string
 import numpy as np
 from math import ceil
+from typing import NewType
 
+actualAnswer = NewType('actualAnswer' ,str) 
+givenAnswer = NewType('givenAnswer' ,str)
 
-
-def getScore(sentence1,sentence2):
+def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
+    
     
     def preprocess_sentence(text):
             
@@ -20,10 +23,16 @@ def getScore(sentence1,sentence2):
             stop_words = set(stopwords.words("english"))
             words = text.split()
             words = [w for w in words if w not in stop_words]
+            
             return " ".join(words)
-
-    if(len(sentence1) and len(sentence2) != 0 ):
         
+        
+    lenS1 = len(sentence1)
+    lenS2 = len(sentence2)
+    
+    if((lenS1 and lenS2 != 0) and ((lenS1 * 1/7) < lenS2)):
+        
+        # print("Gets in")
         processed_sentence1 = preprocess_sentence(sentence1)
         processed_sentence2 = preprocess_sentence(sentence2)
         final_score = 0
@@ -107,4 +116,5 @@ def getScore(sentence1,sentence2):
         # return average_similarity_score
     # print("Score :",getScore("rahul ate apple","the apple was eaten by rahul"))
     else:
+        # print("Gets in else")
         return 0

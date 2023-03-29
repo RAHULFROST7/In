@@ -21,7 +21,7 @@ def check_device():
     return device
 
 
-def getResult(AUDIOFILE):
+def convertText(AUDIOFILE):
     
     
     # """Get speech recognition model."""

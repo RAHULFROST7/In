@@ -1,4 +1,4 @@
-from resources.transcriber import getResult
+from resources.transcriber import convertText
 from resources.scoreGenrator import getScore
 
 def banner(text):
@@ -20,15 +20,22 @@ def main():
         banner("Got the path")
     else:
         banner("failed fetching path")
-        
+    
+    # banner("Spliting audio")
+    # splitAudio()
+    # banner('Done')
+    
     banner("converting audio to txt")
-    audio_text = getResult(path)
+    audio_text = convertText(path)
     banner("Succesfully converted")
     
+    
+    
     banner("Comparing for score")
-    score = getScore(audio_text,"audio_text")
-    print(f"Final Score is :{score}%\n")
+    score = getScore(audio_text,"Rahul kldfgjdfmkejew rewpiopwejwzncdKJnasds lsjfsklfja ejkfekjfn ijoefioajaif kf kjjf sfajspfhaif sfih nndioagj s fdf9refj frefjio]")
+    print(f"Final Score is : {score}%\n")
     banner("Ran without errors")
+    # print(audio_text)
     
 
 if __name__ == "__main__":

@@ -1,6 +1,10 @@
 from pymongo import MongoClient
+from typing import NewType
 
-def answers(question):
+askedQuestion = NewType('askedQuestion',str)
+
+def answers(question : askedQuestion) -> list:
+    
     client = MongoClient('mongodb+srv://webinterview:12345@cluster0.unj3vql.mongodb.net/main?retryWrites=true&w=majority')
     # print('connection successful');
 
