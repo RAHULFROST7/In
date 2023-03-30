@@ -1,16 +1,9 @@
-import re
+# import re
 import torch
 import whisper
-from timeit import timeit
+from typing import NewType
 
-
-<<<<<<< HEAD
-
-AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio.mp3"  # Save audio file as audio.mp3
-=======
-# AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
->>>>>>> 06ff82e83c9086cff6f3232da78dc290f2da312c
-
+path_of_audio = NewType('path_of_i_th_audio',str)
 
 def banner(text):
     # """Display a message when the script is working in the background"""
@@ -18,24 +11,36 @@ def banner(text):
 
 
 def check_device():
+    
     # """Check CUDA availability."""
     if torch.cuda.is_available() == 1:
         device = "cuda"
+        
     else:
         device = "cpu"
+        
     return device
 
 
-def get_result(AUDIOFILE):
+def convertText(AUDIOFILE : path_of_audio):
+    
+    
     # """Get speech recognition model."""
     # model_name = input("Select speech recognition model name (tiny, base, small, medium, large): ")
+    
+    #choose a mode defaulted
+    """tiny"""
+    
     model_name = "tiny"
+    
     banner("Transcribing text")
     model = whisper.load_model(model_name, device=check_device())
     result = model.transcribe(AUDIOFILE)
     # print("Result: ",result["text"])
     
     return result["text"]
+    
+    
     
 #     format_result('transcription.txt', result["text"])
 
