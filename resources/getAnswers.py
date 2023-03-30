@@ -3,7 +3,7 @@ from typing import NewType
 
 askedQuestion = NewType('askedQuestion',str)
 
-def answers(question : askedQuestion) -> list:
+def getAnswers(question : askedQuestion):
     
     client = MongoClient('mongodb+srv://webinterview:12345@cluster0.unj3vql.mongodb.net/main?retryWrites=true&w=majority')
     # print('connection successful');
@@ -18,4 +18,4 @@ def answers(question : askedQuestion) -> list:
     for i in data:
         collected = list(i.values())[1:]
         
-    return collected
+    return collected[1:]

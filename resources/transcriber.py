@@ -1,11 +1,9 @@
 # import re
 import torch
 import whisper
-# from timeit import timeit
+from typing import NewType
 
-
-# AUDIOFILE = r"D:\Projects and codes\Audio-transcriber-main\audio 2.mp3"  # Save audio file as audio.mp3
-
+path_of_audio = NewType('path_of_i_th_audio',str)
 
 def banner(text):
     # """Display a message when the script is working in the background"""
@@ -13,15 +11,18 @@ def banner(text):
 
 
 def check_device():
+    
     # """Check CUDA availability."""
     if torch.cuda.is_available() == 1:
         device = "cuda"
+        
     else:
         device = "cpu"
+        
     return device
 
 
-def convertText(AUDIOFILE):
+def convertText(AUDIOFILE : path_of_audio):
     
     
     # """Get speech recognition model."""
@@ -38,6 +39,8 @@ def convertText(AUDIOFILE):
     # print("Result: ",result["text"])
     
     return result["text"]
+    
+    
     
 #     format_result('transcription.txt', result["text"])
 
