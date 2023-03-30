@@ -11,13 +11,38 @@ import numpy as np
 from pydub import AudioSegment
 import time
 import os
+import shutil
 
 options = Options()
-#<---------Directing to default chrome proafile---------->
-options.add_argument("user-data-dir=C:\\Users\\hp\\AppData\\Local\\Google\\Chrome\\User Data")
-options.add_experimental_option("detach", True)
+#<---------Directing to default chrome profile---------->
+
+
+def get_chrome_profile_path():
+    home_path = os.path.expanduser("~")
+    if os.name == "posix":  # Linux, macOS
+        return os.path.join(home_path, ".config/google-chrome")
+    elif os.name == "nt":  # Windows
+        return os.path.join(home_path, "AppData/Local/Google/Chrome/User Data")
+
+chrome_profile_path = get_chrome_profile_path()
+
+original = chrome_profile_path
+cloned = chrome_profile_path+" clone"
+
+
+if os.path.exists(cloned):
+    print("The folder exists!")
+else:
+    shutil.copytree(original,cloned)
+    print("Cloning complete.")
+
+options.add_argument("user-data-dir="+cloned)
+
 driver = webdriver.Chrome (service=Service(ChromeDriverManager().install()),
 options=options) 
+
+# Switch to the new tab
+# driver.switch_to.window(driver.window_handles[-1])
 driver.get("https://meet.google.com/dfr-sxzd-giq")
 #<---------Clicking join now button in meet---------->
 join_button = WebDriverWait(driver, 10).until(
