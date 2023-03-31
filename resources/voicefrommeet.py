@@ -9,7 +9,7 @@ import soundcard as sc
 import soundfile as sf
 import numpy as np
 from pydub import AudioSegment
-import time
+
 import os
 import shutil
 
@@ -19,9 +19,13 @@ options = Options()
 
 def get_chrome_profile_path():
     home_path = os.path.expanduser("~")
+    
     if os.name == "posix":  # Linux, macOS
+        
         return os.path.join(home_path, ".config/google-chrome")
+    
     elif os.name == "nt":  # Windows
+        
         return os.path.join(home_path, "AppData/Local/Google/Chrome/User Data")
 
 chrome_profile_path = get_chrome_profile_path()
@@ -31,29 +35,32 @@ cloned = chrome_profile_path+" clone"
 
 
 if os.path.exists(cloned):
+    
     print("The folder exists!")
+    
 else:
+    
     shutil.copytree(original,cloned)
+    
     print("Cloning complete.")
+
 
 options.add_argument("user-data-dir="+cloned)
 
-driver = webdriver.Chrome (service=Service(ChromeDriverManager().install()),
-options=options) 
+driver = webdriver.Chrome (service=Service(ChromeDriverManager().install()),options=options) 
 
 # Switch to the new tab
 # driver.switch_to.window(driver.window_handles[-1])
-driver.get("https://meet.google.com/dfr-sxzd-giq")
+
+driver.get("https://meet.google.com/vyj-vykd-cxg?pli=1")  #meet link
 #<---------Clicking join now button in meet---------->
-join_button = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Join now')]"))
-)
+join_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Join now')]")))
 
 # Click the "Join now" button
 join_button.click()
 
 OUTPUT_FILE_NAME = "out.wav"    # file name.
-OUTPUT_FILE_NAME_MP3 = "./Interview/resources/out.mp3"    # mp3 file name.
+OUTPUT_FILE_NAME_MP3 = "./resources/out.mp3"    # mp3 file name.
 SAMPLE_RATE = 48000              # [Hz]. sampling rate.
 DURATION = None                  # [sec]. duration recording audio.
 
