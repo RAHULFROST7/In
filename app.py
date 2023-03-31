@@ -2,6 +2,7 @@ from resources.transcriber import convertText
 from resources.scoreGenrator import getScore
 from resources.slicer import sliceAudio
 from resources.getAnswers import getAnswers
+import time
 def banner(text):
     # for loging
     print(f"!! {text} !!\n")
@@ -38,31 +39,46 @@ def main():
     # for j in range(len(audio_text)):
         # 
         # print(f"Result {j} :",audio_text[j])
-    
-    banner("Getting answers")
-    answerDB = []
-    questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
-    for i in range(0,len(questionsDB)):
+    while True:
         
-       temp_list = getAnswers(questionsDB[i])
-       answerDB.append(temp_list)
-    # print(answerDB) 
-    banner("Done") if len(answerDB) == len(questionsDB) == len(givenAnsDB) else banner("Fatal Error : Can't fetch answers")
+        try:
+            banner("Getting answers")
+            answerDB = []
+            questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
+            for i in range(0,len(questionsDB)):
+                
+                temp_list = getAnswers(questionsDB[i])
+                answerDB.append(temp_list)
+                # print(answerDB) 
     
+            break # break out of the while loop if the try block is successful
+        except:
+            banner("<Network Error>")
+            waiting_time = 20
+            print(f"Waiting for {waiting_time} seconds...", end='')
+            for i in range(waiting_time, -1, -1):
+                print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
+                time.sleep(1)
+            banner("Retrying")
+        banner("Done")
+        
+
     banner("Comparing for score")
     
     ansScores = []
-    for k in range(0,len(answerDB)):
+    
+    for k in range(0,(len(answerDB)-2)):
         temp = getScore(answerDB[k],givenAnsDB[k])
         ansScores.append(temp)
+        # print(givenAnsDB[k])
         
     total = 0
     for l in range(0,len(ansScores)):
         total += ansScores[l]
         
     totalScore = total/len(ansScores)
-    print(totalScore)
-    banner("Done")
+    print(totalScore,"\n")
+    banner("Done 100%")
     
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
 import torch
 import whisper
 from typing import NewType
+import warnings
 
 path_of_audio = NewType('path_of_i_th_audio',str)
 
@@ -25,6 +26,7 @@ def check_device():
 def convertText(AUDIOFILE : path_of_audio):
     
     
+    warnings.filterwarnings("ignore", category=UserWarning)
     # """Get speech recognition model."""
     # model_name = input("Select speech recognition model name (tiny, base, small, medium, large): ")
     
@@ -37,7 +39,7 @@ def convertText(AUDIOFILE : path_of_audio):
     model = whisper.load_model(model_name, device=check_device())
     result = model.transcribe(AUDIOFILE)
     # print("Result: ",result["text"])
-    
+    warnings.resetwarnings()
     return result["text"]
     
     
