@@ -3,27 +3,43 @@ from resources.scoreGenrator import getScore
 from resources.slicer import sliceAudio
 from resources.getAnswers import getAnswers
 import time
+from resources.voicefrommeet import recordAudio
+from resources.record_audio import record
 def banner(text):
     # for loging
     print(f"!! {text} !!\n")
     
-    
-def feroz():
-    
-    return r"D:\Projects and codes\interview\resources\test_audio_e_airport.mp3"
-
 
 def main():
     
-    # recording audio
-    banner("getting audio path from feroz")
-    path = feroz()
+    # # recording audio
+    # banner("Starting meet")
+    # while True:
+    #     try:
+        
+    #         path = record()
+    #         break
+        
+    #     except:
+            
+    #         waiting_time = 15
+    #         print(f"Waiting for {waiting_time} seconds...", end='')
+    #         for i in range(waiting_time, 0, -1):
+    #             print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
+    #             time.sleep(1)
+    #         path = recordAudio()
+    # # print(path)
     
-    banner("Done") if len(path) != 0 else banner("Fatal Error : Failed fetching path")
+    # banner("Done") if len(path) != 0 else banner("Fatal Error : Failed fetching path")
+    
+    path = r"D:\Projects and codes\interview\resources\out.mp3"
     
     # slicing
     banner("Spliting audio")
-    list_paths = sliceAudio(path=path)
+    for i in range(0,9):
+        
+        list_paths = sliceAudio(input_file=path)
+        
     banner('Done')
     # print(list_paths)
     
