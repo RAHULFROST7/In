@@ -91,9 +91,7 @@ for i in range(num_documents):
     time_diff = timestamp1 - timestamp2
     timestamps.append(int(abs( time_diff.total_seconds())))
 
-
-audio = audio = AudioSegment.from_file("./resources/audio.mp3", format="mp3")
-#audio = AudioSegment.from_wav("./resources/audio.mp3")
+audio = AudioSegment.from_wav("./resources/out.wav")
 
 print(timestamps)
 
@@ -106,7 +104,7 @@ for i, duration in enumerate(timestamps):
     sliced_audio = audio[start_time * 1000:end_time * 1000]
 
      # Export the sliced audio to a file
-    sliced_audio.export("sliced_audio_" + str(i) + ".mp3", format="mp3")
+    sliced_audio.export(f"./resources/sliced_audio_{i}.mp3", format="mp3")
 
     start_time = end_time
 >>>>>>> d4032c86ba1204ef2987a8c133f69cc24227a559

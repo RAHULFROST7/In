@@ -19,7 +19,7 @@ stream = p.open(format=sample_format,
                 frames_per_buffer=chunk,
                 input=True)
 
-# Create a list to store the recorded data
+# Create a list to store the recorded dataq
 frames = []
 
 # Record the audio until the specified key is pressed
