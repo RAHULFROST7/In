@@ -9,7 +9,6 @@ sample_format = pyaudio.paInt16
 channels = 2
 fs = 44100
 OUTPUT_FILE_NAME = "./resources/out.wav"    # file name.
-OUTPUT_FILE_NAME_MP3 = "./resources/out.mp3"    # mp3 file name.
 # Create an instance of PyAudio
 p = pyaudio.PyAudio()
 
@@ -42,5 +41,3 @@ wf.setsampwidth(p.get_sample_size(sample_format))
 wf.setframerate(fs)
 wf.writeframes(b"".join(frames))
 wf.close()
-AudioSegment.from_wav(OUTPUT_FILE_NAME).export(OUTPUT_FILE_NAME_MP3, format="mp3")
-os.remove("./resources/out.wav")
