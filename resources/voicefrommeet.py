@@ -84,3 +84,4 @@
 # # AudioSegment.from_wav(OUTPUT_FILE_NAME).export(OUTPUT_FILE_NAME_MP3, format="mp3")
 # os.remove("./resources/out.wav")
 # #test
+timestamps = [123, 3, 4]
