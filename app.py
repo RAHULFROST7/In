@@ -3,7 +3,7 @@ from resources.scoreGenrator import getScore
 from resources.slicer import sliceAudio
 from resources.getAnswers import getAnswers
 import time
-from resources.voicefrommeet import recordAudio
+# from resources.voicefrommeet import recordAudio
 from resources.record_audio import record
 def banner(text):
     # for loging
@@ -12,36 +12,16 @@ def banner(text):
 
 def main():
     
-    # # recording audio
-    # banner("Starting meet")
-    # while True:
-    #     try:
-        
-    #         path = record()
-    #         break
-        
-    #     except:
-            
-    #         waiting_time = 15
-    #         print(f"Waiting for {waiting_time} seconds...", end='')
-    #         for i in range(waiting_time, 0, -1):
-    #             print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
-    #             time.sleep(1)
-    #         path = recordAudio()
-    # # print(path)
-    
-    # banner("Done") if len(path) != 0 else banner("Fatal Error : Failed fetching path")
-    
-    path = r"D:\Projects and codes\interview\resources\out.mp3"
+    print("Main")
+    path = r"D:\Projects and codes\interview\resources\extenion_interview\out.wav"
     
     # slicing
     banner("Spliting audio")
-    for i in range(0,9):
-        
-        list_paths = sliceAudio(input_file=path)
+    
+    list_paths = sliceAudio(path=path)
         
     banner('Done')
-    # print(list_paths)
+    print(list_paths)
     
     banner("converting audio to txt")
     givenAnsDB = []
@@ -49,52 +29,53 @@ def main():
         
         text = convertText(list_paths[i])
         givenAnsDB.append(text)
-    # print(audio_text)
+        
+    print(givenAnsDB)
     
     banner("Done") if len(givenAnsDB) == len(list_paths) else banner("Fatal error : Can't convert given part of audio")
-    # for j in range(len(audio_text)):
-        # 
-        # print(f"Result {j} :",audio_text[j])
-    while True:
+    # # for j in range(len(audio_text)):
+    #     # 
+    #     # print(f"Result {j} :",audio_text[j])
+    # while True:
         
-        try:
-            banner("Getting answers")
-            answerDB = []
-            questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
-            for i in range(0,len(questionsDB)):
+    #     try:
+    #         banner("Getting answers")
+    #         answerDB = []
+    #         questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
+    #         for i in range(0,len(questionsDB)):
                 
-                temp_list = getAnswers(questionsDB[i])
-                answerDB.append(temp_list)
-                # print(answerDB) 
+    #             temp_list = getAnswers(questionsDB[i])
+    #             answerDB.append(temp_list)
+    #             # print(answerDB) 
     
-            break # break out of the while loop if the try block is successful
-        except:
-            banner("<Network Error>")
-            waiting_time = 20
-            print(f"Waiting for {waiting_time} seconds...", end='')
-            for i in range(waiting_time, -1, -1):
-                print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
-                time.sleep(1)
-            banner("Retrying")
-        banner("Done")
+    #         break # break out of the while loop if the try block is successful
+    #     except:
+    #         banner("<Network Error>")
+    #         waiting_time = 20
+    #         print(f"Waiting for {waiting_time} seconds...", end='')
+    #         for i in range(waiting_time, -1, -1):
+    #             print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
+    #             time.sleep(1)
+    #         banner("Retrying")
+    #     banner("Done")
         
 
-    banner("Comparing for score")
+    # banner("Comparing for score")
     
-    ansScores = []
+    # ansScores = []
     
-    for k in range(0,(len(answerDB)-2)):
-        temp = getScore(answerDB[k],givenAnsDB[k])
-        ansScores.append(temp)
-        # print(givenAnsDB[k])
+    # for k in range(0,(len(answerDB)-2)):
+    #     temp = getScore(answerDB[k],givenAnsDB[k])
+    #     ansScores.append(temp)
+    #     # print(givenAnsDB[k])
         
-    total = 0
-    for l in range(0,len(ansScores)):
-        total += ansScores[l]
+    # total = 0
+    # for l in range(0,len(ansScores)):
+    #     total += ansScores[l]
         
-    totalScore = total/len(ansScores)
-    print(totalScore,"\n")
-    banner("Done 100%")
+    # totalScore = total/len(ansScores)
+    # print(totalScore,"\n")
+    # banner("Done 100%")
     
 
 if __name__ == "__main__":
