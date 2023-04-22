@@ -33,7 +33,7 @@ def convertText(AUDIOFILE : path_of_audio):
     #choose a mode defaulted
     """tiny"""
     
-    model_name = "medium"
+    model_name = "tiny"
     
     banner("Transcribing text")
     model = whisper.load_model(model_name, device=check_device())
@@ -43,17 +43,4 @@ def convertText(AUDIOFILE : path_of_audio):
     
     return result["text"]
     
-    
-    
-#     format_result('transcription.txt', result["text"])
-
-
-# def format_result(file_name, text):
-#     # """Put a newline character after each sentence and prompt user for translation."""
-#     format_text = re.sub('\.', '.\n', text)
-#     with open(file_name, 'a', encoding="utf-8") as file:
-#         banner("Writing transcription to text file")
-#         file.write(format_text)
-
-# print(type(get_result()))  # Get audio transcription and translation if needed
 # print(convertText(r"D:\Projects and codes\interview\resources\test_audio_e_airport.mp3"))

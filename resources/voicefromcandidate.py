@@ -1,8 +1,10 @@
 import pyaudio
 import wave
 import keyboard
-from pydub import AudioSegment
-import os
+# from pydub import AudioSegment
+# import os
+
+
 # Set the recording parameters
 chunk = 1024
 sample_format = pyaudio.paInt16
