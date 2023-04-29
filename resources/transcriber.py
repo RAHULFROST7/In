@@ -33,12 +33,12 @@ def convertText(AUDIOFILE : path_of_audio):
     #choose a mode defaulted
     """tiny"""
     
-    model_name = "tiny"
+    model_name = "medium"
     
     banner("Transcribing text")
     model = whisper.load_model(model_name, device=check_device())
     result = model.transcribe(AUDIOFILE)
-    # print("Result: ",result["text"])
+    print("Result: ",result["text"])
     warnings.resetwarnings()
     
     return result["text"]

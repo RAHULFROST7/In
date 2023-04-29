@@ -28,7 +28,7 @@ def sliceAudio(path:str):
         # timestamp1 = datetime.datetime.strptime(timestamp1_str, "%Y-%m-%d %H:%M:%S")
         # timestamp2 = datetime.datetime.strptime(timestamp2_str, "%Y-%m-%d %H:%M:%S")
     timestamps=[]
-    print("got 3")
+    # print("got 3")
     for i in range(num_documents):
         timestamp1_str = collection.find()[i]['start']
         timestamp2_str = collection.find()[i]['end']
@@ -42,7 +42,11 @@ def sliceAudio(path:str):
     audio = AudioSegment.from_wav(path)
     print("got 5")
     print(timestamps)
-
+    
+    # test data
+    timestamps = [50,57,45]
+    # test data
+    
     start_time = 0
     path_list = []
     for i, duration in enumerate(timestamps):
@@ -55,7 +59,7 @@ def sliceAudio(path:str):
         sliced_audio.export(f"D:\\Projects and codes\\interview\\resources\\sliced_audio_{i+1}.mp3", format="mp3")
         path_list.append(f"D:\\Projects and codes\\interview\\resources\\sliced_audio_{i+1}.mp3")
         start_time = end_time
-    print("got 6")
+    # print("got 6")
     return path_list
 
 # print(sliceAudio(r"D:\Projects and codes\interview\resources\extenion_interview\out.wav"))
