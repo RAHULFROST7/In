@@ -90,6 +90,7 @@ def main():
     file = open(r'D:\Projects and codes\interview\resources\extinsion_interview\result.txt', 'w')
 
     file.write(f'{totalScore}')
+    # 
 
     file.close()
 
