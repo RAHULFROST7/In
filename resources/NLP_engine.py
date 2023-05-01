@@ -117,13 +117,9 @@ def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
             # res = ceil((final_score/2)*100)
             # print("Simalarity score is :",0 if ceil((final_score/2)*100) < 50 else (100 if ceil((final_score/2)*100) > 100 else ceil((final_score/2)*100)))
             # return 0 if res < 50 else (100 if res > 100 else res) 
-            # return average_similarity_score
-            # print("Score :",getScore("rahul ate apple","the apple was eaten by rahul"))
-    
+            
         return 0 if max(score_list) < 50 else (100 if max(score_list) > 100 else max(score_list))
     else:
-        # print("Gets in else")
+
         return 0
     
-# result = getScore(["rahul loves summer and wintemklfmklfkldfl ewiofjewio fjioewfjoiewfoei fpoewf ejfioejf oeiofdifo ewj foejfoiwfi djfldsfklfkjfijeofijwoif ewifjioew fjioewjfie jioewjewjfioejf ewoiwj  ioejewj eiojewfiojewfi if iofj iefj io fjioefj esiofjfj ewo jiojoewj fejpo fewjofo ewfoewjfo ewofjewofj ewpo er so much","rahul hates summer an jfsiof jfijewiofjeifjewiofefnjfndsjofhosiursfnjkldn ndkjsi jfi jf jf dsjfdsjfdsjf idsjf iojfio j dsfj pfklasklckscmsklcjspcpoascjpsjpasdjjd   edja ioj dsjaaj djd poejpodj djop d winter djijdsdskjnvnioroifjeipofmpodsfmposfmpsfmpe"],"rahul jfjij gioioj iojiosopfpos fposkfpdsokpo epokspoidpokdspofsofjspfj sfpkpofskfds kfdokdposkpsodfjds fspoisifj fiosjfsio fjdsij ofodfjoijios ff")
-# print(result)

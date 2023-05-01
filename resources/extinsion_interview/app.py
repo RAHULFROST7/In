@@ -127,7 +127,7 @@ def main():
     # Create a Python dictionary
     # data = {"Result 1": ansScores[0],"Result 2": ansScores[1],"Result 3": ansScores[2]}
     data = {"Results": [{"Question":"What is Ml","Result": ansScores[0]},{"Question":"What is AI","Result": ansScores[1]},{"Question":"What is Data Science","Result": ansScores[2]},{"Question":"What is Data Structures","Result": ansScores[2]},{"Question":"What is Deepleaning","Result": ansScores[2]}]}
-    writeData(data)
+    writeData(data)         
     banner("completed execution")
     
 
