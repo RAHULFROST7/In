@@ -20,7 +20,7 @@ def writeData(data):
     # data = {"Result 1": 23, "Result 2": 30, "Result 3": 54}
 
     # Open a file for writing
-    with open(r"resources\extinsion_interview\result.json", "w") as f:
+    with open(r"D:\Projects and codes\interview\resources\extinsion_interview\result.json", "w") as f:
         # Use json.dump() to write the data to the file
         json.dump(data, f)
 
@@ -96,6 +96,9 @@ def main():
     
     for k in range(0,(len(answerDB))):
         temp = getScore(answerDB[k],givenAnsDB[k])
+        temp_1 = 0
+        # if temp > 90 and temp < 70 :
+        #     temp_1 = temp*1.2
         ansScores.append(temp)
         # print(givenAnsDB[k])
     print(ansScores)
