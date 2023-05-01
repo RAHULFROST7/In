@@ -1,5 +1,5 @@
-from resources.transcriber import convertText
-from resources.scoreGenrator import getScore
+from resources.Transcriber import convertText
+from resources.NLP_engine import getScore
 from resources.slicer import sliceAudio
 from resources.getAnswers import getAnswers
 import time

@@ -13,13 +13,13 @@ def sliceAudio(path:str):
 
     # create a MongoClient object and connect to your MongoDB instance
     client = pymongo.MongoClient(connection_string)
-    print("got 1")
+    # print("got 1")
     # get the database
     db = client[database_name]
-    print("got 2")
+    # print("got 2")
     # get the collection
     collection = db[collection_name]
-    print("got 3")
+    # print("got 3")
     # you can now perform operations on the collection
     # for example, find all documents in the collection
     num_documents = collection.count_documents({})
@@ -37,14 +37,16 @@ def sliceAudio(path:str):
         time_diff = timestamp1 - timestamp2
         timestamps.append(int(abs( time_diff.total_seconds())))
 
-    print("got 4")
+    # print("got 4")
     # audio = audio = AudioSegment.from_file(path, format="mp3")
     audio = AudioSegment.from_wav(path)
-    print("got 5")
+    # print("got 5")
     print(timestamps)
     
     # test data
+    # comment if you found this uncommented
     timestamps = [50,57,45]
+    print(timestamps)
     # test data
     
     start_time = 0
