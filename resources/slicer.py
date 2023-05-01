@@ -45,8 +45,8 @@ def sliceAudio(path:str):
     
     # test data
     # comment if you found this uncommented
-    timestamps = [50,57,45]
-    print(timestamps)
+    # timestamps = [50,57,45]
+    # print(timestamps)
     # test data
     
     start_time = 0

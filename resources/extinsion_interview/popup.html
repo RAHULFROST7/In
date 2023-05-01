@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
@@ -164,6 +165,8 @@
     button:disabled {
       box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
     }
+    
+
 
 
 
@@ -181,6 +184,9 @@
       align-items: center;
 
     }
+    
+
+
 
 
     /* .circlediv {
@@ -192,16 +198,16 @@
 
 
 <body>
+  
+    <div class="extName">
+      <h4>Google Meet Extension</h4>
+    </div>
 
-  <div class="extName">
-    <h4>Google Meet Extension</h4>
-  </div>
-
-  <div
-    style="width: 250px; height: 250px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center;">
-    <img src="200e8d139737079.6234b0487404d.gif" alt="Chat Bot Image"
-      style="width: 130px; height: 130px; object-fit: contain; border-radius: 50%; margin-top: 70px; margin-left: 90px;">
-  </div>
+    <div
+      style="width: 250px; height: 250px; border-radius: 50%; overflow: hidden; display: flex; justify-content: center;">
+      <img src="bot.gif" alt="Chat Bot Image"
+        style="width: 130px; height: 130px; object-fit: contain; border-radius: 50%; margin-top: 70px; margin-left: 90px;">
+    </div>
 
 
 
@@ -210,9 +216,9 @@
     <div class="button1"><button class="startButton" style="display: none;">Start</button></div>
     <div class="button1"><button class="endButton" style="display: none;">Next Question</button></div>
     <div class="button1"><button class="finishButton" style="display: none;">Finish</button></div>
-    <div class="button1"><button class="results" style="display: none;">Results</button></div>
+    <div class="button1"><button  class="results" style="display: none;">View Results</button><br>
     <p id="result"></p>
-
+    </div>
   
 </body>
 

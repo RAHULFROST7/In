@@ -47,32 +47,22 @@ def main():
     
     
     banner("MAIN")
-    path = r"D:\Projects and codes\interview\resources\extinsion_interview\out.wav"
     
-    # slicing
+    path = r"D:\Projects and codes\interview\resources\extinsion_interview\out.wav"
+
     banner("Spliting audio")
     
     list_paths = sliceAudio(path=path)
         
     banner('Done')
-    # list_paths = [50,57,45]
-    # print(list_paths)
     
     banner("converting audio to txt")
-    # givenAnsDB = []
-    # for i in range(0,len(list_paths)):
         
     givenAnsDB = convertText(list_paths)
-        
-    # givenAnsDB.append(text)
         
     # print(givenAnsDB)
     
     banner("Done") if len(givenAnsDB) == len(list_paths) else banner("Fatal error : Can't convert given part of audio")
-    
-    # for j in range(len(givenAnsDB)):
-        
-    #     print(f"Result {j} :",givenAnsDB[j])
         
     while True:
         
@@ -80,15 +70,14 @@ def main():
             banner("Getting answers")
             answerDB = []
             questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
-            # questionsDB = ["what is machine learning","what is data science","what is data structure"]
 
             for i in range(0,len(questionsDB)):
                 
                 temp_list = getAnswers(questionsDB[i])
                 answerDB.append(temp_list)
-            print(answerDB) 
+            # print(answerDB) 
     
-            break # break out of the while loop if the try block is successful
+            break 
         except:
             banner("<Network Error>")
             waiting_time = 20
@@ -105,7 +94,7 @@ def main():
     
     ansScores = []
     
-    for k in range(0,(len(answerDB))-2):
+    for k in range(0,(len(answerDB))):
         temp = getScore(answerDB[k],givenAnsDB[k])
         ansScores.append(temp)
         # print(givenAnsDB[k])
@@ -115,23 +104,14 @@ def main():
         total += ansScores[l]
         
     totalScore = total/len(ansScores)
-    print(totalScore,"\n")
-    # Open the file in write mode
-    # file = open(r'D:\Projects and codes\interview\resources\extinsion_interview\result.txt', 'w')
+    print(f"\n{totalScore}\n")
 
-    # file.write(f'{totalScore}')
-    # # 
-
-    # file.close()
-
-    # Create a Python dictionary
-    # data = {"Result 1": ansScores[0],"Result 2": ansScores[1],"Result 3": ansScores[2]}
-    data = {"Results": [{"Question":"What is Ml","Result": ansScores[0]},{"Question":"What is AI","Result": ansScores[1]},{"Question":"What is Data Science","Result": ansScores[2]},{"Question":"What is Data Structures","Result": ansScores[2]},{"Question":"What is Deepleaning","Result": ansScores[2]}]}
+    data = {"results": [{"question":"What is Ml","result": ansScores[0]},{"question":"What is AI","result": ansScores[1]},{"question":"What is Data Science","result": ansScores[2]},{"question":"What is Data Structures","result": ansScores[3]},{"question":"What is Deepleaning","result": ansScores[4]}]}
     writeData(data)         
     banner("completed execution")
     
 
 if __name__ == "__main__":
-    # print("in if")
+
     main()
     
