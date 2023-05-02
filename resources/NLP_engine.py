@@ -17,6 +17,7 @@ givenAnswer = NewType('givenAnswer' ,str)
 def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
     
     warnings.filterwarnings("ignore", category=RuntimeWarning)
+    warnings.filterwarnings("ignore", category=UserWarning)
     def preprocess_sentence(text : str):
             
             text = text.lower()
@@ -39,7 +40,7 @@ def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
         tokens2 = set(nltk.word_tokenize(sentence2.lower()))
         
         
-        for i in range(0,len(sentence1)):
+        for i in range(0,2):
             
             # print("Gets in")
             processed_sentence1 = preprocess_sentence(sentence1[i])
@@ -102,9 +103,11 @@ def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
             
 
             # Compute the average similarity score
+            
             average_similarity_score = 0
             average_similarity_score = spacy_similarity_score * .15 + ( jaccard_similarity_score + cosine_similarity_score + ( weighted_score + sim_score ) * .15 ) / 2
             final_score = ceil(average_similarity_score * 100)
+            # print(final_score)
             score_list.append(final_score)
             # # Print the similarity scores
             # print("Spacy similarity score:", spacy_similarity_score)
@@ -117,9 +120,11 @@ def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
             # res = ceil((final_score/2)*100)
             # print("Simalarity score is :",0 if ceil((final_score/2)*100) < 50 else (100 if ceil((final_score/2)*100) > 100 else ceil((final_score/2)*100)))
             # return 0 if res < 50 else (100 if res > 100 else res) 
-            
+        # return score_list
         return 0 if max(score_list) < 50 else (100 if max(score_list) > 100 else max(score_list))
     else:
 
         return 0
-    
+
+
+print(getScore(["ysf8y8uwejfiwoenhn8inh8euifer yveruh   btrerwb reuo fiuerhrbvyubvhvu vfyb r ebufbv dfbfdbfhuburfjernjhdbvhjdfnvjehjeriuhuehu hh uih fhiuerfh","iuwehfuowhg ucyudhcyu cyudsgcci7dciudshciu dhusc  sbcs yu wcwuwehfwwiufuer hriuu erb riurhrhfuhuof ldfjbdfkjuvhgerbjfbu hjsbj sdbc  dsiuo shbjdsbusydg iwdibv"],"Rdkjvnsdkjvnsdkjndi sdidjsiodj siodjdsi jids sdijcidscids idsjdilsiljsdfio sdiohip fdsij ioscj oisjiocjiodsjcio ds jcids jiodsjiods 9dj oids viojids fi9siodfijioew fidsj iods iodsjvidsjiodjdiov diovud iovhiubkdsbvaogbvyudbvkshdfdbqoduhfvbqei voqiuhbpviuq"))
