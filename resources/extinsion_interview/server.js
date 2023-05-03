@@ -18,92 +18,130 @@ client.connect(err => {
     res.status(500).json({ message: 'Error connecting to database' });
     return;
   }
-  else{
+  else {
     console.log('connected to db');
   }
-  
+
   const collection = client.db("interview").collection("timestamps");
+  const collection1 = client.db("interview").collection("questions")
   app.post('/timestamps', (req, res) => {
     const start = req.body.start
     const end = req.body.end
     collection.countDocuments(function (err, count) {
       if (err) throw err;
       console.log("Number of documents in collection: " + count);
-      
-        collection.insertOne({ start: start, end: end }, function (err, result) {
-          if (err) {
-            console.error(err);
-            res.status(500).json({ message: 'Error inserting data into database' });
-            return;
-          }
+
+      collection.insertOne({ start: start, end: end }, function (err, result) {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ message: 'Error inserting data into database' });
+          return;
+        }
+
+        console.log("1 document inserted");
+        res.json({ message: 'Timestamps inserted successfully' });
+      });
+    });
+  });
+
+
+  // app.get('/face',(req,res)=>{
+  //   const pythonProcess = spawn('python', ['face.py']);
+  //   pythonProcess2.stdout.on('data', (data) => {
+  //     console.log(data.toString());
+  //   });
+  //   pythonProcess2.stderr.on('data', (data) => {
+  //     console.error(data.toString());
+  //   });
+  //   res.send('Python script face started!');
+
+  // })
+
+  app.post('/ranques', (req, res) => {
+    collection1.deleteMany({}, function (err, result) {
+      if (err) throw err;
+      console.log("Deleted questions documents");
+    })
     
-          console.log("1 document inserted");
-          res.json({ message: 'Timestamps inserted successfully' });
-        });
-    });    
+    const dbques = req.body.ques;
+
+
+    //console.log("Number of documents in collection: " + count);
+
+    collection1.insertOne({ ques: dbques }, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Error inserting data into database' });
+        return;
+      }
+
+      console.log("questions document inserted");
+      res.json({ message: 'random questions inserted successfully' });
+    });
+
   });
 
-app.get('/start', (req, res) => {
-  const pythonProcess = spawn('python', ['voicefrommeet.py']);
-  pythonProcess.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  pythonProcess.stderr.on('data', (data) => {
-    console.error(data.toString());
-  });
-  res.send('Python script start started!');
+  app.get('/start', (req, res) => {
+    const pythonProcess = spawn('python', ['voicefrommeet.py']);
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+    res.send('Python script start started!');
 
-  collection.deleteMany({}, function (err, result) {
-    if (err) throw err;
-    console.log("Deleted documents");
+    collection.deleteMany({}, function (err, result) {
+      if (err) throw err;
+      console.log("Deleted documents");
+    })
+
+
+  });
+
+  app.get('/end', (req, res) => {
+    // Execute the Python script only when the "start" button is clicked
+    const pythonProcess = spawn('python', ['end.py']);
+    //const pythonProcess1 = spawn('python', ['app.py']);
+    pythonProcess.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+    res.send('Python script end started!');
+
+
+
+  });
+
+  app.get('/app', (req, res) => {
+    const pythonProcess1 = spawn('python', ['app.py']);
+    //const pythonProcess1 = spawn('python', ['app.py']);
+    pythonProcess1.stdout.on('data', (data) => {
+      console.log(data.toString());
+    });
+    pythonProcess1.stderr.on('data', (data) => {
+      console.error(data.toString());
+    });
+    res.send('Python script app started!');
   })
+  // app.get('/app', (req, res) => {
+  //   fs.readFile('result.txt', 'utf8', (err, data) => {
+  //     if (err) throw err;
+  //     console.log(data);
+  //     if(data > 90){
+  //       res.send(data)
+  //     }
+  //     else{
+  //       res.setHeader('Content-Type', 'text/plain')
+  //       data += 'Suggested Answer'
+  //       res.send(data)
 
-  
-});
+  //     }
+  //   });
 
-app.get('/end', (req, res) => {
-  // Execute the Python script only when the "start" button is clicked
-  const pythonProcess = spawn('python', ['end.py']);
-  //const pythonProcess1 = spawn('python', ['app.py']);
-  pythonProcess.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  pythonProcess.stderr.on('data', (data) => {
-    console.error(data.toString());
-  });
-  res.send('Python script end started!');
-  
-});
-
-app.get('/app',(req,res)=>{
-  const pythonProcess1 = spawn('python', ['app.py']);
-  //const pythonProcess1 = spawn('python', ['app.py']);
-  pythonProcess1.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  pythonProcess1.stderr.on('data', (data) => {
-    console.error(data.toString());
-  });
-  res.send('Python script app started!');
-})
-
-
-// app.get('/app', (req, res) => {
-//   fs.readFile('result.txt', 'utf8', (err, data) => {
-//     if (err) throw err;
-//     console.log(data);
-//     if(data > 90){
-//       res.send(data)
-//     }
-//     else{
-//       res.setHeader('Content-Type', 'text/plain')
-//       data += 'Suggested Answer'
-//       res.send(data)
-      
-//     }
-//   });
-  
-// });
+  // });
 });
 
 app.listen(port, () => {

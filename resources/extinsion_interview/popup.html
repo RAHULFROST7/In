@@ -12,16 +12,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <title>My Extension</title>
-  <script src="popup.js"></script>
+  
   <style>
     body {
       /* background-image: url("gmeetbg.jpg");
       background-size: 180% 70%;
       opacity: 70%; */
       background-repeat: no-repeat;
-      background-image: linear-gradient(90deg, #390354, #100835);
+      background: linear-gradient(90deg, #390354, #100835);
       width: 400px;
       height: 800px;
       margin: 0px !important;
@@ -180,6 +180,26 @@
     padding-top: 30px;
     padding-bottom: 30px;
     }
+  .arrBtn
+  {
+    height: 50px;
+    width: 50px;
+    background-color: #9013FE;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px;
+    left:15px;
+  }
+  .arrBtn:hover
+  {
+   color: #ffffff;
+   background-color: #c800ff;
+  }
   </style>
 </head>
 
@@ -187,7 +207,7 @@
 
 <body>
   
-    <div class="extName">
+    <div class="extName hidden">
       <h4>Google Meet Extension</h4>
     </div>
 
@@ -196,20 +216,24 @@
       <img src="bot.gif" alt="Chat Bot Image"
         style="width: 130px; height: 130px; object-fit: contain; border-radius: 50%; margin-top: 70px; margin-left: 90px;">
     </div> -->
-    <div class="img-bot">
+    <div class="img-bot hidden">
       <img src="bot.gif" alt="Chat Bot Image" style="width: 130px; height: 130px;">
     </div>
 
 
-    <div class="question"></div>
-    <div class="duration"></div>
-    <div class="button1"><button class="startButton" style="display: none;">Start</button></div>
-    <div class="button1"><button class="endButton" style="display: none;">Next Question</button></div>
-    <div class="button1"><button class="finishButton" style="display: none;">Finish</button></div>
-    <div class="button1"><button  class="results" style="display: none;">View Results</button><br>
-    <p id="result"></p>
+    <div class="question hidden"></div>
+    <div class="duration hidden"></div>
+    <div class="button1 hidden"><button class="startButton" style="display: none;">Start</button></div>
+    <div class="button1 hiddem"><button class="endButton" style="display: none;">Next Question</button></div>
+    <div class="button1 hidden"><button class="finishButton" style="display: none;">Finish</button></div>
+    <div class="button1 hidden"><button  class="results" style="display: none;">View Results</button><br>
+    <p id="result" class="hidden"></p>
     </div>
-  
+    
+    <i class="material-icons arrBtn" id="modify-iframe"><span class="material-symbols-outlined">
+      swap_horiz
+      </span></i>
+    <script src="popup.js"></script>
 </body>
 
 </html>

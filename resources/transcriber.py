@@ -8,7 +8,7 @@ import warnings
 
 def banner(text):
     # """Display a message when the script is working in the background"""
-    print(f"# {text} #")
+    print(f"# {text} #\n")
 
 
 def check_device():
@@ -34,7 +34,7 @@ def convertText(AUDIOFILE : list):
 
     model_name = "tiny"
 
-    banner("Transcribing text")
+    banner("Transcribing texts")
     model = whisper.load_model(model_name, device=check_device())
         
     for i in range(0,len(AUDIOFILE)):

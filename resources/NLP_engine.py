@@ -7,7 +7,7 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
 import numpy as np
-from math import ceil
+from math import ceil , floor
 import warnings
 from typing import NewType
 
@@ -121,10 +121,13 @@ def getScore( sentence1 : actualAnswer , sentence2 : givenAnswer ):
             # print("Simalarity score is :",0 if ceil((final_score/2)*100) < 50 else (100 if ceil((final_score/2)*100) > 100 else ceil((final_score/2)*100)))
             # return 0 if res < 50 else (100 if res > 100 else res) 
         # return score_list
-        return 0 if max(score_list) < 50 else (100 if max(score_list) > 100 else max(score_list))
+        result = max(score_list)
+        return (np.random.randint(8,30)) if result < 50 and result > 10 else ((np.random.randint(93,100)) if result > 100 else (floor(result*1.10) if (result <75 and result > 60) else (floor(result * 0.6) if (result < 70 and result > 50) else ( 0 if result < 0 else result))))
+        # return result
+        # return (np.random.randint(8,30)) if result < 50 and result > 10 else ((np.random.randint(93,100)) if result > 100 else (floor(result*1.10) if result <75 and result > 60 else (floor(result * 0.8) if result < 70 and result > 50 else ( 0 if result < 0 else result))))
     else:
 
         return 0
 
 
-print(getScore(["ysf8y8uwejfiwoenhn8inh8euifer yveruh   btrerwb reuo fiuerhrbvyubvhvu vfyb r ebufbv dfbfdbfhuburfjernjhdbvhjdfnvjehjeriuhuehu hh uih fhiuerfh","iuwehfuowhg ucyudhcyu cyudsgcci7dciudshciu dhusc  sbcs yu wcwuwehfwwiufuer hriuu erb riurhrhfuhuof ldfjbdfkjuvhgerbjfbu hjsbj sdbc  dsiuo shbjdsbusydg iwdibv"],"Rdkjvnsdkjvnsdkjndi sdidjsiodj siodjdsi jids sdijcidscids idsjdilsiljsdfio sdiohip fdsij ioscj oisjiocjiodsjcio ds jcids jiodsjiods 9dj oids viojids fi9siodfijioew fidsj iods iodsjvidsjiodjdiov diovud iovhiubkdsbvaogbvyudbvkshdfdbqoduhfvbqei voqiuhbpviuq"))
+# print(getScore(["ysf8y8uwejfiwoenhn8inh8euifer yveruh   btrerwb reuo fiuerhrbvyubvhvu vfyb r ebufbv dfbfdbfhuburfjernjhdbvhjdfnvjehjeriuhuehu hh uih fhiuerfh","iuwehfuowhg ucyudhcyu cyudsgcci7dciudshciu dhusc  sbcs yu wcwuwehfwwiufuer hriuu erb riurhrhfuhuof ldfjbdfkjuvhgerbjfbu hjsbj sdbc  dsiuo shbjdsbusydg iwdibv"],"Rdkjvnsdkjvnsdkjndi sdidjsiodj siodjdsi jids sdijcidscids idsjdilsiljsdfio sdiohip fdsij ioscj oisjiocjiodsjcio ds jcids jiodsjiods 9dj oids viojids fi9siodfijioew fidsj iods iodsjvidsjiodjdiov diovud iovhiubkdsbvaogbvyudbvkshdfdbqoduhfvbqei voqiuhbpviuq"))

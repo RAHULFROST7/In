@@ -19,7 +19,7 @@ data = {
             "result": "-1"
         },
         {
-            "question": "What is Deepleaning",
+            "question": "What is Deep learning",
             "result": "-1"
         }
     ]

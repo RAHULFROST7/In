@@ -1,4 +1,4 @@
-import pymongo
+from pymongo import MongoClient
 import datetime
 from pydub import AudioSegment
 
@@ -12,7 +12,7 @@ def sliceAudio(path:str):
     collection_name = "timestamps"
 
     # create a MongoClient object and connect to your MongoDB instance
-    client = pymongo.MongoClient(connection_string)
+    client = MongoClient(connection_string)
     # print("got 1")
     # get the database
     db = client[database_name]
@@ -35,13 +35,13 @@ def sliceAudio(path:str):
         timestamp1 = datetime.datetime.strptime(timestamp1_str, "%Y-%m-%d %H:%M:%S")
         timestamp2 = datetime.datetime.strptime(timestamp2_str, "%Y-%m-%d %H:%M:%S")
         time_diff = timestamp1 - timestamp2
-        timestamps.append(int(abs( time_diff.total_seconds())))
+        timestamps.append(int(abs(time_diff.total_seconds())))
 
     # print("got 4")
     # audio = audio = AudioSegment.from_file(path, format="mp3")
     audio = AudioSegment.from_wav(path)
     # print("got 5")
-    print(timestamps)
+    print(timestamps,"\n")
     
     # test data
     # comment if you found this uncommented
@@ -62,6 +62,31 @@ def sliceAudio(path:str):
         path_list.append(f"D:\\Projects and codes\\interview\\resources\\sliced_audio_{i+1}.mp3")
         start_time = end_time
     # print("got 6")
-    return path_list
+    
+    
+    collection_name = "questions"
+
+    # create a MongoClient object and connect to your MongoDB instance
+    # client = MongoClient(connection_string)
+
+    # get the database
+    db = client[database_name]
+
+    # get the collection
+    collection = db[collection_name]
+
+    # you can now perform operations on the collection
+    # for example, find all documents in the collection
+
+    # fetch all documents from the collection
+    docs = collection.find()
+
+    # print each document
+    for doc in docs:
+        data = (doc['ques'])
+    
+    print(f"{list(data)}\n")
+
+    return path_list,list(data)
 
 # print(sliceAudio(r"D:\Projects and codes\interview\resources\extenion_interview\out.wav"))

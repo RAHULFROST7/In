@@ -28,6 +28,7 @@ askedQuestion = NewType('askedQuestion',str)
 
 def getAnswers(question : askedQuestion):
     
+    collected = []
     client = MongoClient('mongodb+srv://webinterview:12345@cluster0.unj3vql.mongodb.net/main?retryWrites=true&w=majority')
     # print('connection successful');
 
@@ -43,6 +44,33 @@ def getAnswers(question : askedQuestion):
         
     return collected[1:]
 
+def getOrder():
+
+    connection_string = "mongodb+srv://interview:12345@cluster0.1ahe7l7.mongodb.net/interview?retryWrites=true&w=majority"
+    database_name = "interview"
+    collection_name = "questions"
+
+    # create a MongoClient object and connect to your MongoDB instance
+    client = MongoClient(connection_string)
+
+    # get the database
+    db = client[database_name]
+
+    # get the collection
+    collection = db[collection_name]
+
+    # you can now perform operations on the collection
+    # for example, find all documents in the collection
+
+    # fetch all documents from the collection
+    docs = collection.find()
+
+    # print each document
+    for doc in docs:
+        data = (doc['ques'])
+    
+    return list(data)
+
 def main():
     
     
@@ -52,7 +80,7 @@ def main():
 
     banner("Spliting audio")
     
-    list_paths = sliceAudio(path=path)
+    list_paths,order = sliceAudio(path=path)
         
     banner('Done')
     
@@ -64,28 +92,32 @@ def main():
     
     banner("Done") if len(givenAnsDB) == len(list_paths) else banner("Fatal error : Can't convert given part of audio")
         
-    while True:
+    # while True:
         
-        try:
-            banner("Getting answers")
-            answerDB = []
-            questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is data structure","what is deep learning"]
-
-            for i in range(0,len(questionsDB)):
-                
-                temp_list = getAnswers(questionsDB[i])
-                answerDB.append(temp_list)
-            # print(answerDB) 
+        # try:
+        
+    banner("Getting answers")
+    answerDB = []
+    # questionsDB = ["What is machine learning?","What is Artificial Intelligence?","What is data science?","What is deep learning?","What is data structures?"]
+    # questionsDB = ["what is machine learning","what is artificial intelligence","what is data science","what is deep learning","what is data structure"]
     
-            break 
-        except:
-            banner("<Network Error>")
-            waiting_time = 20
-            print(f"Waiting for {waiting_time} seconds...", end='')
-            for i in range(waiting_time, -1, -1):
-                print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
-                time.sleep(1)
-            banner("Retrying")
+    for i in range(0,len(order)):
+
+        temp_list = getAnswers(order[i])
+        
+        answerDB.append(temp_list)
+        
+    # print(answerDB) 
+    
+        #     break 
+        # except:
+        #     banner("<#Network Error#>")
+        #     waiting_time = 20
+        #     print(f"Waiting for {waiting_time} seconds...", end='')
+        #     for i in range(waiting_time, -1, -1):
+        #         print(f"\r{i} seconds remaining...{' '*(len(str(waiting_time))-len(str(i)))}", end='')
+        #         time.sleep(1)
+        #     banner("Retrying")
             
     banner("Done")
         
@@ -95,10 +127,10 @@ def main():
     ansScores = []
     
     for k in range(0,(len(answerDB))):
+        
+        print(answerDB[k],givenAnsDB[k])
         temp = getScore(answerDB[k],givenAnsDB[k])
-        temp_1 = 0
-        # if temp > 90 and temp < 70 :
-        #     temp_1 = temp*1.2
+
         ansScores.append(temp)
         # print(givenAnsDB[k])
     print(ansScores)
@@ -107,7 +139,7 @@ def main():
         total += ansScores[l]
         
     totalScore = total/len(ansScores)
-    print(f"\n{totalScore}\n")
+    print(f"\nAverage Score is {totalScore}\n")
 
     data = {"results": [{"question":"What is Ml","result": ansScores[0]},{"question":"What is AI","result": ansScores[1]},{"question":"What is Data Science","result": ansScores[2]},{"question":"What is Data Structures","result": ansScores[3]},{"question":"What is Deepleaning","result": ansScores[4]}]}
     writeData(data)         

@@ -33,7 +33,7 @@ while True:
         print("inside it")
         os.remove('stop_recording')
         break
-print("end of rec")
+print("\n!! end of recording !!")
 # Stop and close the microphone stream
 stream.stop_stream()
 stream.close()
@@ -48,4 +48,3 @@ wf.setsampwidth(p.get_sample_size(sample_format))
 wf.setframerate(fs)
 wf.writeframes(b"".join(frames))
 wf.close()
-print('fuck')
