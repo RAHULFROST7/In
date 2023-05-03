@@ -128,7 +128,7 @@ def main():
     
     for k in range(0,(len(answerDB))):
         
-        print(answerDB[k],givenAnsDB[k])
+        # print(answerDB[k],givenAnsDB[k])
         temp = getScore(answerDB[k],givenAnsDB[k])
 
         ansScores.append(temp)
@@ -141,7 +141,7 @@ def main():
     totalScore = total/len(ansScores)
     print(f"\nAverage Score is {totalScore}\n")
 
-    data = {"results": [{"question":"What is Ml","result": ansScores[0]},{"question":"What is AI","result": ansScores[1]},{"question":"What is Data Science","result": ansScores[2]},{"question":"What is Data Structures","result": ansScores[3]},{"question":"What is Deepleaning","result": ansScores[4]}]}
+    data = {"results": [{"question":order[0],"result": ansScores[0]},{"question":order[1],"result": ansScores[1]},{"question":order[2],"result": ansScores[2]},{"question":order[3],"result": ansScores[3]},{"question":order[4],"result": ansScores[4]}]}
     writeData(data)         
     banner("completed execution")
     
